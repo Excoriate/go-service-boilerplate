@@ -48,6 +48,11 @@ install_pre_commit_on_commit_hook(){
     pre-commit install --hook-type pre-commit
 }
 
+auto_update_pre_commit(){
+    log "Auto-updating pre-commit..."
+    pre-commit autoupdate
+}
+
 install_pre_commit_on_pre_push_hook(){
     log "Installing pre-commit on pre-push hooks..."
     pre-commit install --hook-type pre-push
@@ -89,6 +94,9 @@ main() {
           ;;
         commitmsg)
             install_pre_commit_on_commit_msg_hook
+          ;;
+        auto-update)
+            auto_update_pre_commit
           ;;
         *)
           log "Error: Invalid hook type '${hook_type}'. Valid values are 'commit', 'prepush', 'commitmsg'."

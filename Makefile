@@ -32,50 +32,55 @@ pre-commit-init:
 	@echo "===========> Pre-commit init"
 	@$(PRE_COMMIT_INIT_SCRIPT) --hook-type=commit
 	@$(PRE_COMMIT_INIT_SCRIPT) --hook-type=prepush
+	@$(PRE_COMMIT_INIT_SCRIPT) --hook-type=auto-update
 
 # ==============================================================================
 # Targets Golang
 # ==============================================================================
 
 ## tidy: tidy go.mod
-.PHONY: tidy
-tidy:
+.PHONY: go-tidy
+go-tidy:
 	@$(GO) mod tidy
 
 ## fmt: Run go fmt against code.
-.PHONY: fmt
-fmt:
+.PHONY: go-fmt
+go-fmt:
 	@$(GO) fmt -x ./...
 
 ## vet: Run go vet against code.
-.PHONY: vet
-vet:
+.PHONY: go-vet
+go-vet:
 	@$(GO) vet ./...
 
 ## lint: Run go lint against code.
-.PHONY: lint
-lint:
+.PHONY: go-lint
+go-lint:
 	@golangci-lint run -v --config .golangci.yaml
 
 ## style: Code style -> fmt,vet,lint
-.PHONY: style
-style: fmt vet lint
+.PHONY: go-style
+go-style: go-fmt go-vet go-lint
 
 ## test: Run unit test
-.PHONY: test
-test:
+.PHONY: go-test
+go-test:
 	@echo "===========> Run unit test"
 	@$(GO) test -race -v ./...
 
 ## Build Go Binary
-.PHONY: build
-build:
+.PHONY: go-build
+go-build:
 	@echo "===========> Building binary"
-	@$(GO_BUILD_SCRIPT) go-service-boilerplate
+	@$(GO_BUILD_SCRIPT) --binary go-service-boilerplate --path ./cmd/main.go
 
-run:
+.PHONY: go-run
+go-run:
 	@echo "===========> Running binary"
 	@./$(CLI_NAME) $(ARGS)
+
+.PHONY: go-ci
+go-ci: go-style go-test go-tidy go-build
 
 
 # ==============================================================================

@@ -26,6 +26,7 @@ tasks:
     cmds:
       - ./scripts/hooks/pre-commit-init.sh --hook-type=commit
       - ./scripts/hooks/pre-commit-init.sh --hook-type=prepush
+      - ./scripts/hooks/pre-commit-init.sh --hook-type=auto-update
   snapshot:
     cmds:
       - goreleaser check
@@ -61,25 +62,26 @@ tasks:
     cmds:
       - echo "===========> Run unit test"
       - go test -race -v ./...
-      # ****************************************************
-      # CLI & Development Tasks
-      # ****************************************************
-  cli-build:
-    desc: Build CLI
+  go-build:
+    desc: Build the binary
+    generates:
+      - ./{{.BINARY_NAME}}
     cmds:
-      - |
-        # Call the script
-        scripts/golang/go_build.sh {{.BINARY_NAME}}
-    vars:
-      BINARY_PATH:
-        sh: echo "{{.BINARY_PATH | default "dist"}}"
-  cli-run:
+      - ./scripts/golang/go_build.sh --binary {{.BINARY_NAME}} --path ./cmd/main.go
+  go-run:
     desc: Run CLI
     cmds:
       - ./{{.BINARY_NAME}} {{.CLI_ARGS}}
-      # ****************************************************
-      # Docker Tasks
-      # ****************************************************
+  go-ci:
+    desc: Run all the tests and code checks
+    cmds:
+      - task: go-style
+      - task: go-tidy
+      - task: go-test
+      - task: go-build
+        # ****************************************************
+        # Docker Tasks
+        # ****************************************************
   docker-build-refresh:
     desc: Build Docker image entirely from scratch
     cmds:
