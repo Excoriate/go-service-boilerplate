@@ -5,7 +5,7 @@ includes:
   common:
     taskfile: ./taskfiles/Taskfile.common.yml
 vars:
-  BINARY_NAME: golang-cli-boilerplate
+  BINARY_NAME: go-service-boilerplate
 tasks:
   default:
     cmds:

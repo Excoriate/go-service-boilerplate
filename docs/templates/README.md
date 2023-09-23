@@ -14,9 +14,9 @@ Add your content here
 
 ### Usage 🎬
 Add your content here
-For a list of commands, run `golang-cli-boilerplate --help`.
+For a list of commands, run `go-service-boilerplate --help`.
 ```bash
-golang-cli-boilerplate --help
+go-service-boilerplate --help
 ```
 ---
 
@@ -43,7 +43,7 @@ make pre-commit-init
 The binaries are managed by [GoReleaser](https://goreleaser.com/), [Homebrew](https://brew.sh/) and [Release please](https://github.com/googleapis/release-please). For a more detailed set of instructions, see the [installation](docs/INSTALLATION.md) file. If you're a `Linux/MacOS` user, you can install it using [Homebrew](https://brew.sh/):
 ```bash
 brew tap Excoriate/homebrew-tap
-brew install golang-cli-boilerplate
+brew install go-service-boilerplate
 ```
 >**NOTE**: The `brew` method requires a valid `GITHUB_TOKEN` environment variable with enough permissions to read and write into the `tap` repository.
 

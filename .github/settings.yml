@@ -1,6 +1,6 @@
 ---
 repository:
-  name: golang-cli-boilerplate
+  name: go-service-boilerplate
   description: Golang CLI Boilerplate is a bulletproof Golang CLI template with batteries included 🔋
   topics: example, devops, tooling, ecs, sre, cli
   default_branch: main

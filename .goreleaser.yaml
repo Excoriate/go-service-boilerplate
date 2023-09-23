@@ -1,5 +1,5 @@
 ---
-project_name: golang-cli-boilerplate
+project_name: go-service-boilerplate
 before:
   hooks:
     - go mod tidy
@@ -44,12 +44,12 @@ brews:
       name: homebrew-tap
       branch: main
     # yamllint disable-line rule:comments rule:line-length
-    url_template: https://github.com/Excoriate/golang-cli-boilerplate/releases/download/{{ .Tag }}/{{ .ArtifactName }}
+    url_template: https://github.com/Excoriate/go-service-boilerplate/releases/download/{{ .Tag }}/{{ .ArtifactName }}
     commit_author:
       name: Excoriate
       email: alex_torres@outlook.com
     folder: Formula
-    homepage: https://github.com/Excoriate/golang-cli-boilerplate
+    homepage: https://github.com/Excoriate/go-service-boilerplate
     description: >-
       ECS Deployer is a CLI tool for deploying ECS services and tasks, plus other nice stuffs.
     license: MIT

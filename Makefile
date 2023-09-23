@@ -6,7 +6,7 @@ GOARCH ?= $(shell go env GOARCH)
 GO_BUILD_SCRIPT := $(shell pwd)/scripts/golang/go_build.sh
 PRE_COMMIT_INIT_SCRIPT := $(shell pwd)/scripts/hooks/pre-commit-init.sh
 OUTPUT_DIR := $(shell pwd)/dist
-CLI_NAME := golang-cli-boilerplate
+CLI_NAME := go-service-boilerplate
 
 .DEFAULT_GOAL := help
 
@@ -71,7 +71,7 @@ test:
 .PHONY: build
 build:
 	@echo "===========> Building binary"
-	@$(GO_BUILD_SCRIPT) golang-cli-boilerplate
+	@$(GO_BUILD_SCRIPT) go-service-boilerplate
 
 run:
 	@echo "===========> Running binary"

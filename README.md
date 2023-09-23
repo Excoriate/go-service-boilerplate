@@ -3,22 +3,22 @@
 This is a versatile and easy-to-use template for building a robust Golang CLI with [Cobra](https://github.com/spf13/cobra) and [Viper](https://github.com/spf13/viper). It comes with built-in AWS adapters via Golang SDK v2 and handy utilities.
 
 ---
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Excoriate/golang-cli-boilerplate)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Excoriate/go-service-boilerplate)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Powered By: GoReleaser](https://img.shields.io/badge/powered%20by-goreleaser-green.svg?style=flat-square)](https://github.com/goreleaser)
-[![Docker Build](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/docker-build.yml)
-[![Go Build](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-build.yml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-build.yml)
-[![Go linter](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-ci-lint.yaml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-ci-lint.yaml)
-[![Go unit tests](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-ci-test.yml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/go-ci-test.yml)
-[![Lint Docker](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/docker-hadolint.yml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/docker-hadolint.yml)
-[![Yamllint GitHub Actions](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/yaml-linter.yml/badge.svg)](https://github.com/Excoriate/golang-cli-boilerplate/actions/workflows/yaml-linter.yml)
+[![Docker Build](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/docker-build.yml)
+[![Go Build](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-build.yml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-build.yml)
+[![Go linter](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-ci-lint.yaml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-ci-lint.yaml)
+[![Go unit tests](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-ci-test.yml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/go-ci-test.yml)
+[![Lint Docker](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/docker-hadolint.yml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/docker-hadolint.yml)
+[![Yamllint GitHub Actions](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/yaml-linter.yml/badge.svg)](https://github.com/Excoriate/go-service-boilerplate/actions/workflows/yaml-linter.yml)
 
 ---
 ## Getting Started 🚦
 Use this repository as a [GitHub Template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) to create your own CLI:
 
 - [ ] Clone this repository and start adding your command and flag definitions. Utilize pre-installed AWS adapters and included utilities to kickstart your CLI development.
-- [ ] This template's CLI is called `golang-cli-boilerplate`. You can rename it by changing the name using your favourite tool, or just using our IDE with a simple `Ctrl+Shift+R` and replace all the occurrences of `golang-cli-boilerplate` with your new name (or including the org/`golang-cli-boilerplate`) if applicable.
+- [ ] This template's CLI is called `go-service-boilerplate`. You can rename it by changing the name using your favourite tool, or just using our IDE with a simple `Ctrl+Shift+R` and replace all the occurrences of `go-service-boilerplate` with your new name (or including the org/`go-service-boilerplate`) if applicable.
 - [ ] Configure [PreCommit](https://pre-commit.com/) hooks by running `task pre-commit-init`. This will install the pre-commit hooks in your local repository.
 - [ ] Update the `LICENSE.md` file with your own license.
 - [ ] Verify that everything is working as expected:
@@ -130,7 +130,7 @@ func GetClient(cmd *cobra.Command) *cli.Client {
 }
 ```
 ### Adapters 🧩
-Adapters are known also as `clients`. They can plug into the `cliClient` and provide additional functionality. This template includes a subcommand called `aws-ecs` in the `cmd/example` package. It's a subcommand that use the `aws` adapter to read the `ECS` clusters in your account. It's a good example of how to use the `cliClient` and the `aws` adapter. See [here](https://github.com/Excoriate/golang-cli-boilerplate/blob/4caff5eade39799fb3945e52d14f937251233e9a/cmd/example/aws.go#L68-L68)
+Adapters are known also as `clients`. They can plug into the `cliClient` and provide additional functionality. This template includes a subcommand called `aws-ecs` in the `cmd/example` package. It's a subcommand that use the `aws` adapter to read the `ECS` clusters in your account. It's a good example of how to use the `cliClient` and the `aws` adapter. See [here](https://github.com/Excoriate/go-service-boilerplate/blob/4caff5eade39799fb3945e52d14f937251233e9a/cmd/example/aws.go#L68-L68)
 
 ---
 
@@ -165,6 +165,6 @@ Find me in:
 - 🧳 [Linkedin](https://www.linkedin.com/in/alextorresruiz/)
 
 
-<a href="https://github.com/Excoriate/golang-cli-boilerplate/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Excoriate/golang-cli-boilerplate" />
+<a href="https://github.com/Excoriate/go-service-boilerplate/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Excoriate/go-service-boilerplate" />
 </a>

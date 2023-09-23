@@ -50,4 +50,4 @@ terraform.tfstate.backup
 # Rust/Cargo
 Cargo.lock
 target/
-golang-cli-boilerplate
+go-service-boilerplate

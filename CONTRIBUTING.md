@@ -11,9 +11,9 @@ Thank you for your interest in contributing to our Golang CLI Boilerplate! Our C
 
 ## Getting Started 🎬
 
-* Check our [open issues](https://github.com/Excoriate/golang-cli-boilerplate/issues).
+* Check our [open issues](https://github.com/Excoriate/go-service-boilerplate/issues).
 * Propose a new feature or bug fix by opening a new issue for discussion.
-* For beginners, look at issues labeled as [good first issue](https://github.com/Excoriate/golang-cli-boilerplate/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+* For beginners, look at issues labeled as [good first issue](https://github.com/Excoriate/go-service-boilerplate/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
 Contributions are always welcome whether you have a new feature proposal, a bug fix, or even if you want to improve our documentation.
 ### Open a GitHub issue
@@ -107,7 +107,7 @@ task docker-build
 
 ## Building The Project 💼
 
-You can build the project using `go build .` in the root of the repository, or if you want to create the container image, you can use `docker build -t golang-cli-boilerplate -f Dockerfile .` .
+You can build the project using `go build .` in the root of the repository, or if you want to create the container image, you can use `docker build -t go-service-boilerplate -f Dockerfile .` .
 
 ## Releasing 🏷️
 

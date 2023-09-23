@@ -94,7 +94,7 @@ issues:
     # This is just a warning, not an error, and it's safe for the
     # function RunCommand to run commands with a variable number of arguments
     # since most of the time, it should be used by known commands.
-    # See: https://github.com/Excoriate/golang-cli-boilerplate/blob/
+    # See: https://github.com/Excoriate/go-service-boilerplate/blob/
     # main/pkg/utils/commands.go#L28-L28
     - path: utils/commands\.go
       linters:

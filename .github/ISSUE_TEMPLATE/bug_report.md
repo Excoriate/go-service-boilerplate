@@ -1,13 +1,13 @@
 ---
 name: 🪲 Bug Report
-about: If something isn't working as expected on golang-cli-boilerplate CLI.
+about: If something isn't working as expected on go-service-boilerplate CLI.
 title: "[Bug Title]"
 labels: "bug"
 ---
 
 ## 🪲 Describe the Bug
-Provide a clear explanation of the bug within the framework of golang-cli-boilerplate CLI.
-Example: "golang-cli-boilerplate crashes when attempting to provision a new resource through the `golang-cli-boilerplate resource` command."
+Provide a clear explanation of the bug within the framework of go-service-boilerplate CLI.
+Example: "go-service-boilerplate crashes when attempting to provision a new resource through the `go-service-boilerplate resource` command."
 
 ## ⚡️ Type of Bug
 Please select the type of bug you are reporting:
@@ -20,7 +20,7 @@ Please select the type of bug you are reporting:
 ## 🔬 Steps to Reproduce
 Detail out the steps to reproduce the bug.
 Example:
-1. Run the `golang-cli-boilerplate resource` command.
+1. Run the `go-service-boilerplate resource` command.
 2. Define the resource parameters.
 3. Observe the crash/error message.
 
@@ -30,7 +30,7 @@ Example: "The CLI should've provisioned the resource and outputted success messa
 
 ## 🌚 Actual Behavior
 Describe what actually occurred given the steps.
-Example: "golang-cli-boilerplate crashed and an error message was displayed."
+Example: "go-service-boilerplate crashed and an error message was displayed."
 
 ## 📷 Screenshots
 Include screenshots to better illustrate the bug, if necessary.
