@@ -20,11 +20,13 @@ usage() {
 # Remove binary file if it exists
 remove_old_binary() {
   local BINARY_FULL_PATH="$1"
+  local rm_cmd
 
   if [[ -f ${BINARY_FULL_PATH} ]]; then
     log "Removing old binary..."
-    rm "${BINARY_FULL_PATH}"
-    if [[ "$?" -ne "0" ]]; then
+    rm_cmd=$(rm "${BINARY_FULL_PATH}")
+
+    if [[ "$rm_cmd" -ne "0" ]]; then
       log "Failed to remove old binary at ${BINARY_FULL_PATH}"
       exit 1
     fi
@@ -35,10 +37,12 @@ remove_old_binary() {
 build_binary() {
   local BINARY_FULL_PATH="$1"
   local GO_SRC="$2"
+  local build_cmd
 
   log "Building binary in path ${BINARY_FULL_PATH}..."
-  GOOS=linux GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}"
-  if [[ "$?" -ne "0" ]]; then
+  build_cmd=$(GOOS=linux GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+
+  if [[ "$build_cmd" -ne "0" ]]; then
     log "Failed to build binary"
     exit 1
   fi
