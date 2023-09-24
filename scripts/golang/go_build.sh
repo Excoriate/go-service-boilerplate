@@ -6,6 +6,10 @@
 SCRIPT_NAME
 SCRIPT_NAME=$(basename "$0")
 
+# Global variables.
+declare OS_NAME
+declare ARCH_NAME
+
 # Log a message
 log() {
   local MESSAGE="$1"
@@ -37,14 +41,29 @@ remove_old_binary() {
 build_binary() {
   local BINARY_FULL_PATH="$1"
   local GO_SRC="$2"
-  local build_cmd
+  local build_linux
+  local build_m1_mac
+  local build_non_m1_mac
 
   log "Building binary in path ${BINARY_FULL_PATH}..."
-  build_cmd=$(GOOS=linux GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  build_linux=$(GOOS=linux GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  build_m1_mac=$(GOOS=darwin GOARCH=arm64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  build_non_m1_mac=$(GOOS=darwin GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
 
-  if [[ "$build_cmd" -ne "0" ]]; then
-    log "Failed to build binary"
-    exit 1
+  #Check OS and ARCH
+  if [[ "$OS_NAME" == "linux" ]] && [[ "$ARCH_NAME" == "amd64" ]]; then
+      build_linux=$(GOOS=linux GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  elif [[ "$OS_NAME" == "darwin" ]] && [[ "$ARCH_NAME" == "arm64" ]]; then
+      build_m1_mac=$(GOOS=darwin GOARCH=arm64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+ elif [[ "$OS_NAME" == "mac" ]] && [[ "$ARCH_NAME" == "arm64" ]]; then
+      build_m1_mac=$(GOOS=darwin GOARCH=arm64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+ elif [[ "$OS_NAME" == "mac" ]] && [[ "$ARCH_NAME" == "amd64" ]]; then
+      build_non_m1_mac=$(GOOS=darwin GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  elif [[ "$OS_NAME" == "darwin" ]] && [[ "$ARCH_NAME" == "amd64" ]]; then
+      build_non_m1_mac=$(GOOS=darwin GOARCH=amd64 go build -o "${BINARY_FULL_PATH}" "${GO_SRC}")
+  elif [[ "$OS_NAME" == "UNKNOWN" ]] || [[ "$ARCH_NAME" == "UNKNOWN" ]]; then
+      log "Failed to determine OS or ARCH"
+      exit 1
   fi
 
   log "Binary built successfully"
@@ -60,16 +79,51 @@ add_to_gitignore_if_not_exist() {
     touch "${GITIGNORE_FILE}"
   fi
 
-  if grep -qvE "^${BINARY_NAME}$" "${GITIGNORE_FILE}"; then
+  if ! grep -q "^${BINARY_NAME}$" ${GITIGNORE_FILE}; then
     log "Adding binary to .gitignore file..."
     echo "${BINARY_NAME}" >> "${GITIGNORE_FILE}"
+  else
+    log "Binary already exists in .gitignore file"
   fi
+}
+
+set_current_os() {
+  local uname_output
+  local os_name_found
+  uname_output=$(uname -s)
+
+  case "${uname_output}" in
+    Linux*)     os_name_found=linux;;
+    Darwin*)    os_name_found=mac;;
+    *)          os_name_found="UNKNOWN:${uname_output}"
+  esac
+
+  log "Current OS: ${os_name_found}"
+  export OS_NAME="${os_name_found}"
+}
+
+set_current_arch() {
+  local uname_output
+  local arch_name_found
+  uname_output=$(uname -m)
+
+  case "${uname_output}" in
+    x86_64*)    arch_name_found=amd64;;
+    arm64*)     arch_name_found=arm64;;
+    *)          arch_name_found="UNKNOWN:${uname_output}"
+  esac
+
+  log "Current Arch: ${arch_name_found}"
+  export ARCH_NAME="${arch_name_found}"
 }
 
 # Main Function
 main() {
   local BINARY_NAME=""
   local GO_SRC=""
+
+  set_current_os
+  set_current_arch
 
   # Parse arguments
   while (( "$#" )); do

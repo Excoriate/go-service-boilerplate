@@ -1,6 +1,6 @@
-# Golang CLI Boilerplate 🛠️
+# Golang App Boilerplate 🛠️
 
-Add your CLI description here
+Add your App description here
 
 
 ---
@@ -27,7 +27,7 @@ go-service-boilerplate --help
 ---
 
 ### Linters 🧹
-This CLI includes a [MakeFile](https://www.gnu.org/software/make/) and a [TaskFile](https://taskfile.dev/#/) with the necessary (best practices) configuration to build and lint your CLI. Both tools include the same capability, so you can choose the one you prefer.
+This App includes a [MakeFile](https://www.gnu.org/software/make/) and a [TaskFile](https://taskfile.dev/#/) with the necessary (best practices) configuration to build and lint your App. Both tools include the same capability, so you can choose the one you prefer.
 In order to enforce [precommit](https://pre-commit.com/) hooks, run:
 ```bash
 # Using the TaskFile

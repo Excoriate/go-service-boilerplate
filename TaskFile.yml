@@ -63,16 +63,32 @@ tasks:
     cmds:
       - echo "===========> Run unit test"
       - go test -race -v ./...
+      #  go-build:
+      #    desc: Build the binary
+      #    generates:
+      #      - ./{{.BINARY_NAME}}
+      #    cmds:
+      #      - ./scripts/golang/go_build.sh --binary {{.BINARY_NAME}} --path ./cmd/main.go
   go-build:
     desc: Build the binary
+    sources:
+      - ./cmd/main.go
     generates:
       - ./{{.BINARY_NAME}}
     cmds:
-      - ./scripts/golang/go_build.sh --binary {{.BINARY_NAME}} --path ./cmd/main.go
-  go-run:
-    desc: Run CLI
+      - if [ -f ./{{.BINARY_NAME}} ]; then rm ./{{.BINARY_NAME}}; fi
+      - go build -o {{.BINARY_NAME}} ./cmd/main.go
+  go-run-bin:
+    desc: Run App
+    deps: [go-build]
     cmds:
-      - ./{{.BINARY_NAME}} {{.CLI_ARGS}}
+      - ./{{.BINARY_NAME}}
+  go-run:
+    desc: Run App from the source code
+    dir: ./cmd
+    deps: [go-build]
+    cmds:
+      - go run main.go {{.App_ARGS}}
   go-ci:
     desc: Run all the tests and code checks
     cmds:
@@ -90,7 +106,7 @@ tasks:
         ./scripts/containers/build-and-run.sh --image={{.BINARY_NAME}} \
         --rebuild=true \
         --action=build \
-        --dockerfile={{.CLI_ARGS}}
+        --dockerfile={{.App_ARGS}}
   docker-build:
     desc: Build Docker image only if it doesn't exist previously.
     cmds:
@@ -98,17 +114,17 @@ tasks:
         ./scripts/containers/build-and-run.sh --image={{.BINARY_NAME}} \
          --rebuild=false \
          --action=build \
-         --dockerfile={{.CLI_ARGS}}
+         --dockerfile={{.App_ARGS}}
   docker-build-and-run:
-    desc: Build and run the CLI on Docker
+    desc: Build and run the App on Docker
     cmds:
       - |
         ./scripts/containers/build-and-run.sh --image={{.BINARY_NAME}} \
          --rebuild=true \
          --action=all \
-         --dockerfile={{.CLI_ARGS}}
+         --dockerfile={{.App_ARGS}}
   docker-run:
-    desc: Run the CLI on Docker from an already built image
+    desc: Run the App on Docker from an already built image
     cmds:
       - |
         ./scripts/containers/build-and-run.sh --image={{.BINARY_NAME}} \

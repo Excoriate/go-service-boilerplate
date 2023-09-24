@@ -1,6 +1,8 @@
-# Golang CLI Boilerplate 🛠️
-
-This is a versatile and easy-to-use template for building a robust Golang CLI with [Cobra](https://github.com/spf13/cobra) and [Viper](https://github.com/spf13/viper). It comes with built-in AWS adapters via Golang SDK v2 and handy utilities.
+<p align="center">
+  <img alt="Logo" src="docs/logo/logo.png" height="140" />
+  <h3 align="center">GoService Boilerplate ⚡️</h3>
+  <p align="center">A simple, opinionated and battle-tested boilerplate for <b>services/microservices/fullstack</b> Go apps.</p>
+</p>
 
 ---
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Excoriate/go-service-boilerplate)
@@ -15,37 +17,35 @@ This is a versatile and easy-to-use template for building a robust Golang CLI wi
 
 ---
 ## Getting Started 🚦
-Use this repository as a [GitHub Template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) to create your own CLI:
+Use this repository as a [GitHub Template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) to create your own service/app:
 
-- [ ] Clone this repository and start adding your command and flag definitions. Utilize pre-installed AWS adapters and included utilities to kickstart your CLI development.
-- [ ] This template's CLI is called `go-service-boilerplate`. You can rename it by changing the name using your favourite tool, or just using our IDE with a simple `Ctrl+Shift+R` and replace all the occurrences of `go-service-boilerplate` with your new name (or including the org/`go-service-boilerplate`) if applicable.
+- [ ] Clone this repository and start adding your command and flag definitions. Utilize pre-installed AWS adapters and included or remove the included utilities to kickstart your development.
+- [ ] This template is called `go-service-boilerplate`. You can rename it by changing the name using your favourite tool, or just using our IDE with a simple `Ctrl+Shift+R` and replace all the occurrences of `go-service-boilerplate` with your new name (or including the org/`go-service-boilerplate`) if applicable.
 - [ ] Configure [PreCommit](https://pre-commit.com/) hooks by running `task pre-commit-init`. This will install the pre-commit hooks in your local repository.
+- [ ] Configure [air](https://github.com/cosmtrek/air) for live reloading by running `task air-setup` (or `make air-setup`).
 - [ ] Update the `LICENSE.md` file with your own license.
 - [ ] Verify that everything is working as expected:
 ```bash
 # If you want to use the MakeFile included.
-make lint
+make go-ci
 
 # Or, if you're using Taskfile
-task go-lint
+task go-ci
 ```
-- [ ] After this step, you should be able to run your CLI:
+- [ ] After this step, you should be able to run your service:
 ```bash
 # TaskFile wraps the binary in a task, so you can run it like this:
-task cli-run -- help
+task go-run
 
-# Or directly, just ensure you're building the binary first
-go build -o <my-cli> main.go
-
-# Or, with TaskFile
-task cli-build
+# Or using a make file target
+make go-run
 ```
->**NOTE**: This template includes a [MakeFile](Makefile) and a [TaskFile](Taskfile.yml) with the necessary (best practices) configuration to build and lint your CLI. Both tools include the same capability, so you can choose the one you prefer.
+>**NOTE**: This template includes a [MakeFile](Makefile) and a [TaskFile](Taskfile.yml) with the necessary (best practices) configuration to build and lint your App. Both tools include the same capability, so you can choose the one you prefer.
 
 ---
 
-## 🔧 Release your CLI
-The release of your CLI is done using [GoReleaser](https://goreleaser.com/). For MacOs, you can use [Homebrew](https://brew.sh/). This template already includes a `.goreleaser.yml` file with the necessary (best practices) configuration to release your CLI.
+## 🔧 Release your App
+The release of your App is done using [GoReleaser](https://goreleaser.com/). For MacOs, you can use [Homebrew](https://brew.sh/). This template already includes a `.goreleaser.yml` file with the necessary (best practices) configuration to release your App.
 In addition, a [GitHub Action](.github/workflows/release.yml) is included to automate the release process.
 ```yaml
   goreleaser:
@@ -81,12 +81,12 @@ In addition, a [GitHub Action](.github/workflows/release.yml) is included to aut
 
 ---
 ## 📚 Documentation
-Documenting your CLI is relevant. This repository includes a [docs](docs/templates/) folder with a template for the documentation of your CLI. You can use it as a starting point for your own documentation. It includes:
-- 📃 `README.md` with a standard structure for a CLI repository.
-- 📃 `INSTALLATION.md` file with the installation instructions for your CLI.
-- 📃 `CONTRIBUTING.md` file with the instructions for contributing to your CLI.
-- 📃 `CODE_OF_CONDUCT.md` file with the code of conduct for your CLI.
-- 📃 `LICENSE.md` file with the license for your CLI.
+Documenting your App is relevant. This repository includes a [docs](docs/templates/) folder with a template for the documentation of your App. You can use it as a starting point for your own documentation. It includes:
+- 📃 `README.md` with a standard structure for a App repository.
+- 📃 `INSTALLATION.md` file with the installation instructions for your App.
+- 📃 `CONTRIBUTING.md` file with the instructions for contributing to your App.
+- 📃 `CODE_OF_CONDUCT.md` file with the code of conduct for your App.
+- 📃 `LICENSE.md` file with the license for your App.
 ```bash
 tree -L 3  docs/
 docs/
@@ -114,23 +114,23 @@ For more details about the document templates, see [this](docs/about_docs.md).
 * Built-in [PreCommit](https://pre-commit.com/) hooks for linting and formatting 🧹
 * Out-of-the-box support for output data in `yaml`, `json` or `tables`🤖
 
-### Safely share the `cliClient` to `subCommands` 🤝
-On each subcommand (at the parent level, which means, those that are in the top of your `pkg`), ensure you're implementing the `GetClient` function:
+### Safely share the `AppAppent` to `subCommands` 🤝
+On each subcommand (at the parent level, which means, those that are in the top of your `pkg`), ensure you're implementing the `GetAppent` function:
 ```go
-func GetClient(cmd *cobra.Command) *cli.Client {
-	ctx := cmd.Context().Value(cliutils.GetCtxKey())
+func GetAppent(cmd *cobra.Command) *App.Appent {
+	ctx := cmd.Context().Value(Apputils.GetCtxKey())
 	if ctx == nil {
-		log.Fatal("Unable to get the client context.")
+		log.Fatal("Unable to get the Appent context.")
 	}
-	client, ok := ctx.(*cli.Client)
+	Appent, ok := ctx.(*App.Appent)
 	if !ok {
-		log.Fatal("Unable to assert client.")
+		log.Fatal("Unable to assert Appent.")
 	}
-	return client
+	return Appent
 }
 ```
 ### Adapters 🧩
-Adapters are known also as `clients`. They can plug into the `cliClient` and provide additional functionality. This template includes a subcommand called `aws-ecs` in the `cmd/example` package. It's a subcommand that use the `aws` adapter to read the `ECS` clusters in your account. It's a good example of how to use the `cliClient` and the `aws` adapter. See [here](https://github.com/Excoriate/go-service-boilerplate/blob/4caff5eade39799fb3945e52d14f937251233e9a/cmd/example/aws.go#L68-L68)
+Adapters are known also as `Appents`. They can plug into the `AppAppent` and provide additional functionality. This template includes a subcommand called `aws-ecs` in the `cmd/example` package. It's a subcommand that use the `aws` adapter to read the `ECS` clusters in your account. It's a good example of how to use the `AppAppent` and the `aws` adapter. See [here](https://github.com/Excoriate/go-service-boilerplate/blob/4caff5eade39799fb3945e52d14f937251233e9a/cmd/example/aws.go#L68-L68)
 
 ---
 
@@ -151,8 +151,8 @@ This template is equipped with an array of tools to maintain a high standard of 
 ---
 ## Roadmap 🗓️
 * [ ] Add a built-in `GitHub` adapter.
-* [ ] Add a CLI for quickly bootstrapping a new CLI
-* [ ] Add an [OpenAI](https://openai.com/) adapter for generating CLI documentation and/or other purposes.
+* [ ] Add a App for quickly bootstrapping a new App
+* [ ] Add an [OpenAI](https://openai.com/) adapter for generating App documentation and/or other purposes.
 
 ## Contributing
 Please read our [contributing guide](./CONTRIBUTING.md). All issues, pull requests and GitHub stars are welcome! Happy coding! 💻

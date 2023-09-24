@@ -1,6 +1,6 @@
 ---
 name: ⭐ Feature Request
-about: Propose a great feature for go-service-boilerplate CLI.
+about: Propose a great feature for go-service-boilerplate App.
 title: "[Feature Title]"
 labels: "enhancement"
 ---

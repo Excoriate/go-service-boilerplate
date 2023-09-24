@@ -1,6 +1,6 @@
 ## 🔧 How to Install
 
-The CLI go-service-boilerplate provides binary distributions for every release which are generated using [GoReleaser](https://goreleaser.com/). To install it, you can use the pre-built binaries which are available for Linux, Windows, and macOS:
+The App go-service-boilerplate provides binary distributions for every release which are generated using [GoReleaser](https://goreleaser.com/). To install it, you can use the pre-built binaries which are available for Linux, Windows, and macOS:
 1. Navigate to the [Releases](https://github.com/Excoriate/go-service-boilerplate/releases) page.
 2. Download the archive for your respective OS and architecture.
 3. Extract the archive.

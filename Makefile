@@ -9,6 +9,7 @@ OUTPUT_DIR := $(shell pwd)/dist
 BINARY := go-service-boilerplate
 AIR_SETUP_SCRIPT := $(shell pwd)/scripts/golang/air.sh
 AIR_BINARY := $(HOME)/go/bin/air
+SRC_DIR := $(shell pwd)/cmd
 
 .DEFAULT_GOAL := help
 
@@ -76,8 +77,14 @@ go-build:
 	@echo "===========> Building binary"
 	@$(GO_BUILD_SCRIPT) --binary go-service-boilerplate --path ./cmd/main.go
 
+## Run Go source code
 .PHONY: go-run
 go-run:
+	@echo "===========> Running source code"
+	@$(GO) run $(SRC_DIR)/main.go $(ARGS)
+
+.PHONY: go-run-bin
+go-run-bin:
 	@echo "===========> Running binary"
 	@./$(BINARY) $(ARGS)
 
@@ -103,12 +110,12 @@ docker-build:
 
 .PHONY: docker-run
 docker-build-run:
-	@echo "Building and running the CLI on Docker"
+	@echo "Building and running the App on Docker"
 	./scripts/containers/build-and-run.sh --image=$(BINARY) --rebuild=true --action=all --dockerfile=$(dockerfile_default)
 
 .PHONY: docker-run
 docker-run:
-	@echo "Running the CLI on Docker from an already built image"
+	@echo "Running the App on Docker from an already built image"
 	./scripts/containers/build-and-run.sh --image=$(BINARY)  --rebuild=false --action=run
 
 # ==============================================================================

@@ -8,7 +8,7 @@
 # Usage: ./script.sh --hook-type=[hook-type]
 #
 # Description: This bash script provides functionality to install pre-commit on the specified git hooks.
-#              It's designed to be used as a simple CLI tool to manage the git hooks.
+#              It's designed to be used as a simple App tool to manage the git hooks.
 #
 # Parameters:
 #    --hook-type: The type of the git hook to manage. Supported values are "commit", "prepush" and "commitmsg".

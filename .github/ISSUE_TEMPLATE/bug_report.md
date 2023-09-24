@@ -1,12 +1,12 @@
 ---
 name: 🪲 Bug Report
-about: If something isn't working as expected on go-service-boilerplate CLI.
+about: If something isn't working as expected on go-service-boilerplate App.
 title: "[Bug Title]"
 labels: "bug"
 ---
 
 ## 🪲 Describe the Bug
-Provide a clear explanation of the bug within the framework of go-service-boilerplate CLI.
+Provide a clear explanation of the bug within the framework of go-service-boilerplate App.
 Example: "go-service-boilerplate crashes when attempting to provision a new resource through the `go-service-boilerplate resource` command."
 
 ## ⚡️ Type of Bug
@@ -26,7 +26,7 @@ Example:
 
 ## 🔑 Expected Behavior
 Explain what you anticipated happening.
-Example: "The CLI should've provisioned the resource and outputted success message."
+Example: "The App should've provisioned the resource and outputted success message."
 
 ## 🌚 Actual Behavior
 Describe what actually occurred given the steps.

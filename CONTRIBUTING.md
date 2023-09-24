@@ -1,6 +1,6 @@
-# Contributing to Golang CLI Boilerplate 🤝
+# Contributing to Golang App Boilerplate 🤝
 
-Thank you for your interest in contributing to our Golang CLI Boilerplate! Our CLI serves as a robust template built on top of Cobra and Viper, coming pre-packed with utilities and AWS adapters via Golang SDK v2. This document simplifies your journey to contribute to our open-source project.
+Thank you for your interest in contributing to our Golang App Boilerplate! Our App serves as a robust template built on top of Cobra and Viper, coming pre-packed with utilities and AWS adapters via Golang SDK v2. This document simplifies your journey to contribute to our open-source project.
 
 ## Pre-requisites 💼
 
@@ -83,7 +83,7 @@ docker build -t golang-ci-boilerplate -f ./Dockerfile .
 
 # Build the binary and container image
 make build
-task cli-build
+task App-build
 
 # Build the docker container
 make docker-build

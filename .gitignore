@@ -51,9 +51,4 @@ terraform.tfstate.backup
 Cargo.lock
 target/
 go-service-boilerplate
-go-service-boilerplate
-go-service-boilerplate
-go-service-boilerplate
-go-service-boilerplate
-go-service-boilerplate
-go-service-boilerplate
+.task

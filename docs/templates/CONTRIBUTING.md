@@ -1,6 +1,6 @@
-# Contributing to [Your CLI Name] 🤝
+# Contributing to [Your App Name] 🤝
 
-Thank you for your interest in contributing to our [Your CLI Name]! Your contributions play a vital role in enhancing the quality and performance of our tool.
+Thank you for your interest in contributing to our [Your App Name]! Your contributions play a vital role in enhancing the quality and performance of our tool.
 
 ## Pre-requisites 💼
 
@@ -71,7 +71,7 @@ docker build -t go-service-boilerplate -f ./Dockerfile .
 
 # Build the binary and container image
 make build
-task cli-build
+task App-build
 
 # Build the docker container
 make docker-build
@@ -96,7 +96,7 @@ task docker-build
 
 ## Building The Project 💼
 
-Build the project using `go build .` in the repository root, or to create a container image, use `docker build -t your-cli-name -f Dockerfile .`.
+Build the project using `go build .` in the repository root, or to create a container image, use `docker build -t your-App-name -f Dockerfile .`.
 
 ## Releasing 🏷️
 
