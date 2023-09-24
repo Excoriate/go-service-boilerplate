@@ -6,6 +6,7 @@ includes:
     taskfile: ./taskfiles/Taskfile.common.yml
 vars:
   BINARY_NAME: go-service-boilerplate
+  AIR_BIN: $HOME/go/bin/air
 tasks:
   default:
     cmds:
@@ -113,3 +114,16 @@ tasks:
         ./scripts/containers/build-and-run.sh --image={{.BINARY_NAME}} \
          --rebuild=false \
          --action=run
+        # ****************************************************
+        # Other development tools
+        # ****************************************************
+  air-setup:
+    desc: Setup air for hot reload
+    cmds:
+      - |
+        ./scripts/golang/air.sh --force
+  air-run:
+    desc: Run air for hot reload
+    cmds:
+      - |
+        {{.AIR_BIN}} -c .air.toml

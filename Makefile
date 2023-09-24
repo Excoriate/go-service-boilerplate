@@ -6,7 +6,9 @@ GOARCH ?= $(shell go env GOARCH)
 GO_BUILD_SCRIPT := $(shell pwd)/scripts/golang/go_build.sh
 PRE_COMMIT_INIT_SCRIPT := $(shell pwd)/scripts/hooks/pre-commit-init.sh
 OUTPUT_DIR := $(shell pwd)/dist
-CLI_NAME := go-service-boilerplate
+BINARY := go-service-boilerplate
+AIR_SETUP_SCRIPT := $(shell pwd)/scripts/golang/air.sh
+AIR_BINARY := $(HOME)/go/bin/air
 
 .DEFAULT_GOAL := help
 
@@ -77,7 +79,7 @@ go-build:
 .PHONY: go-run
 go-run:
 	@echo "===========> Running binary"
-	@./$(CLI_NAME) $(ARGS)
+	@./$(BINARY) $(ARGS)
 
 .PHONY: go-ci
 go-ci: go-style go-test go-tidy go-build
@@ -89,18 +91,35 @@ go-ci: go-style go-test go-tidy go-build
 .PHONY: docker-build
 dockerfile_default := Dockerfile          ## Default dockerfile name to Dockerfile
 
+.PHONY: docker-build-refresh
 docker-build-refresh:
 	@echo "Building Docker image entirely from scratch"
-	./scripts/containers/build-and-run.sh --image=$(CLI_NAME) --rebuild=true --action=build --dockerfile=$(dockerfile_default)
+	./scripts/containers/build-and-run.sh --image=$(BINARY) --rebuild=true --action=build --dockerfile=$(dockerfile_default)
 
+.PHONY: docker-build
 docker-build:
 	@echo "Building Docker image only if it doesn't exist previously."
-	./scripts/containers/build-and-run.sh --image=$(CLI_NAME) --rebuild=false --action=build --dockerfile=$(dockerfile_default)
+	./scripts/containers/build-and-run.sh --image=$(BINARY) --rebuild=false --action=build --dockerfile=$(dockerfile_default)
 
+.PHONY: docker-run
 docker-build-run:
 	@echo "Building and running the CLI on Docker"
-	./scripts/containers/build-and-run.sh --image=$(CLI_NAME) --rebuild=true --action=all --dockerfile=$(dockerfile_default)
+	./scripts/containers/build-and-run.sh --image=$(BINARY) --rebuild=true --action=all --dockerfile=$(dockerfile_default)
 
+.PHONY: docker-run
 docker-run:
 	@echo "Running the CLI on Docker from an already built image"
-	./scripts/containers/build-and-run.sh --image=$(CLI_NAME)  --rebuild=false --action=run
+	./scripts/containers/build-and-run.sh --image=$(BINARY)  --rebuild=false --action=run
+
+# ==============================================================================
+# Other developer tools
+# ==============================================================================
+.PHONY: air-setup
+air-setup:
+	@echo "===========> Setting up air"
+	@$(AIR_SETUP_SCRIPT) --force
+
+.PHONY: air-run
+air-run:
+	@echo "===========> Running air"
+	@$(AIR_BINARY) -c .air.toml
