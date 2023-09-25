@@ -22,32 +22,16 @@ Use this repository as a [GitHub Template](https://docs.github.com/en/repositori
 - [ ] Clone this repository and start adding your command and flag definitions. Utilize pre-installed AWS adapters and included or remove the included utilities to kickstart your development.
 - [ ] This template is called `go-service-boilerplate`. You can rename it by changing the name using your favourite tool, or just using our IDE with a simple `Ctrl+Shift+R` and replace all the occurrences of `go-service-boilerplate` with your new name (or including the org/`go-service-boilerplate`) if applicable.
 - [ ] Configure [PreCommit](https://pre-commit.com/) hooks by running `task pre-commit-init`. This will install the pre-commit hooks in your local repository.
-- [ ] Configure [air](https://github.com/cosmtrek/air) for live reloading by running `task air-setup` (or `make air-setup`).
+- [ ] Configure [Air](https://github.com/cosmtrek/air) for live reloading by running `task air-setup` (or `make air-setup`).
 - [ ] Update the `LICENSE.md` file with your own license.
-- [ ] Verify that everything is working as expected:
-```bash
-# If you want to use the MakeFile included.
-make go-ci
-
-# Or, if you're using Taskfile
-task go-ci
-```
-- [ ] After this step, you should be able to run your service:
-```bash
-# TaskFile wraps the binary in a task, so you can run it like this:
-task go-run
-
-# Or using a make file target
-make go-run
-```
+- [ ] Verify that everything is working as expected by running `task go-ci` (or `make go-ci`).
 >**NOTE**: This template includes a [MakeFile](Makefile) and a [TaskFile](Taskfile.yml) with the necessary (best practices) configuration to build and lint your App. Both tools include the same capability, so you can choose the one you prefer.
 ---
 ## 📚 Documentation
 Documenting your App is relevant. This repository includes a [docs](docs/templates/) folder with a template for the documentation of your App. You can use it as a starting point for your own documentation. It includes:
 - 📃 `README.md` with a standard structure for a App repository.
-- 📃 `RELEASE.md` file with the installation instructions for your App.
+- 📃 `RELEASE.md` file with the release instructions for your App.
 - 📃 `CONTRIBUTING.md` file with the instructions for contributing to your App.
-- 📃 `DEPLOYING.md` file with the installation instructions for your App.
 - 📃 `CODE_OF_CONDUCT.md` file with the code of conduct for your App.
 - 📃 `LICENSE.md` file with the license for your App.
 ```bash
@@ -58,7 +42,6 @@ docs/
     ├── CODE_OF_CONDUCT.md
     ├── CONTRIBUTING.md
     ├── RELEASE.md
-    ├── DEPLOYING.md
     ├── LICENSE
     └── README.md
 ```
@@ -77,12 +60,13 @@ For more details about the document templates, see [this](docs/about_docs.md).
 * Out-of-the-box [GitHub Actions](https://docs.github.com/en/actions) workflows for CI/CD 🚀
 * Built-in [PreCommit](https://pre-commit.com/) hooks for linting and formatting 🧹
 * Server modes that are ready for either _dev_ or _prod_ environments 🚀
+* Set of middlewares for [Fiber](https://docs.gofiber.io/api/middleware/) 🧩 (CORS, compression, etc.)
 * The latest [sLog](https://pkg.go.dev/golang.org/x/exp/slog) for logging 📝
 
 ### Adapters 🧩
 Adapters are known also as `interfaces/drivers`. They can plug into the `App` and provide additional functionality. This template comes with the following:
 * [AWS](https://github.com/aws/aws-sdk-go-v2) - AWS SDK v2 for Golang.
-* [Supabase](https://supabase.com/) - Simple client for Supabase.
+* [SuPaBase](https://supabase.com/) - Simple client for Supabase.
 * [GitHub](https://github.com/google/go-github) - Simple client for GitHub. (Coming soon 🚧)
 * [OpenAI](https://openai.com/) - Simple client for OpenAI. (Coming soon 🚧)
 ---
@@ -103,7 +87,7 @@ This template is equipped with an array of tools to maintain a high standard of 
 
 ---
 ## Roadmap 🗓️
-* [ ] Add a built-in `GitHub` adapter.
+* [ ] Add a built-in [GitHub](https://github.com/google/go-github)[GitHub](https://github.com/google/go-github) adapter for generating App documentation and/or other purposes.
 * [ ] Add an [OpenAI](https://openai.com/) adapter for generating App documentation and/or other purposes.
 
 ## Contributing
