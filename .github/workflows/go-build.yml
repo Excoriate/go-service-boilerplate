@@ -47,4 +47,4 @@ jobs:
           go-version: ${{ matrix.go-versions }}
       - name: Build for ${{ matrix.go-versions }}
         run: |
-          go build -o bin/App
+          go build -o ci-build ./cmd/main.go
