@@ -38,6 +38,7 @@ remove_old_binary() {
 }
 
 # Build binary
+# shellcheck disable=SC2034
 build_binary() {
   local BINARY_FULL_PATH="$1"
   local GO_SRC="$2"
