@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
   pull_request:
+env:
+  SRC_PATH: 'cmd/main.go'
+  OUT_BIN: 'ci-build'
 jobs:
   build-supported-platforms:
     name: Go Build
@@ -30,7 +33,8 @@ jobs:
           go-version: ~1.21
       - name: Build for ${{ matrix.goos }}/${{ matrix.goarch }}
         run: |
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o bin/App
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
+          go build -o ${{ env.OUT_BIN }} ${{ env.SRC_PATH }}
   build-supported-go-version:
     name: Go Build Versions
     needs: build-supported-platforms
@@ -47,4 +51,4 @@ jobs:
           go-version: ${{ matrix.go-versions }}
       - name: Build for ${{ matrix.go-versions }}
         run: |
-          go build -o ci-build ./cmd/main.go
+          go build -o ${{env.OUT_BIN}} ${{ env.SRC_PATH }}
