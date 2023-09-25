@@ -1,0 +1,21 @@
+---
+name: "grype"
+on:
+  push:
+    branches: ['main']
+    tags: ['v*']
+  pull_request:
+jobs:
+  scan-source:
+    name: scan-source
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v3
+      - uses: anchore/scan-action@v3
+        with:
+          path: "."
+          fail-build: true

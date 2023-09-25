@@ -41,50 +41,13 @@ task go-run
 make go-run
 ```
 >**NOTE**: This template includes a [MakeFile](Makefile) and a [TaskFile](Taskfile.yml) with the necessary (best practices) configuration to build and lint your App. Both tools include the same capability, so you can choose the one you prefer.
-
----
-
-## 🔧 Release your App
-The release of your App is done using [GoReleaser](https://goreleaser.com/). For MacOs, you can use [Homebrew](https://brew.sh/). This template already includes a `.goreleaser.yml` file with the necessary (best practices) configuration to release your App.
-In addition, a [GitHub Action](.github/workflows/release.yml) is included to automate the release process.
-```yaml
-  goreleaser:
-    if: needs.release-please.outputs.releases_created == 'true'
-    permissions:
-      contents: write
-    needs:
-      - release-please
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3
-        with:
-          fetch-depth: 0
-      - name: Set up Go
-        uses: actions/setup-go@4d34df0c2316fe8122ab82dc22947d607c0c91f9 # v4
-        with:
-          go-version: '1.20'
-      - name: Download Syft
-        uses: anchore/sbom-action/download-syft@422cb34a0f8b599678c41b21163ea6088edb2624 # v0.14.1
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@f82d6c1c344bcacabba2c841718984797f664a6b # v4
-        with:
-          distribution: goreleaser
-          version: latest
-          args: release --clean
-        env:
-          GITHUB_TOKEN: ${{secrets.GH_HOMEBREW_TOKEN}}
-
-```
->**NOTE**: In order to use the GitHub Action, you need to create a `GH_HOMEBREW_TOKEN` secret in your repository with enough permissions to read and write into the `tap` repository.
-
-
 ---
 ## 📚 Documentation
 Documenting your App is relevant. This repository includes a [docs](docs/templates/) folder with a template for the documentation of your App. You can use it as a starting point for your own documentation. It includes:
 - 📃 `README.md` with a standard structure for a App repository.
-- 📃 `INSTALLATION.md` file with the installation instructions for your App.
+- 📃 `RELEASE.md` file with the installation instructions for your App.
 - 📃 `CONTRIBUTING.md` file with the instructions for contributing to your App.
+- 📃 `DEPLOYING.md` file with the installation instructions for your App.
 - 📃 `CODE_OF_CONDUCT.md` file with the code of conduct for your App.
 - 📃 `LICENSE.md` file with the license for your App.
 ```bash
@@ -94,7 +57,8 @@ docs/
 └── templates
     ├── CODE_OF_CONDUCT.md
     ├── CONTRIBUTING.md
-    ├── INSTALLATION.md
+    ├── RELEASE.md
+    ├── DEPLOYING.md
     ├── LICENSE
     └── README.md
 ```
@@ -104,34 +68,23 @@ For more details about the document templates, see [this](docs/about_docs.md).
 ---
 ## Features 🧩
 
-* Out-of-the-box environment variable management 🌳
-* Auto-scan host environment variables for `AWS` and `Terraform` credentials 📄
+* Auto-scan host environment variables (useful for `AWS`,`Terraform` and other common use cases).
 * Import env vars from dotfiles (`.env`) 📄
 * Leverages built-in AWS adapters ([Golang SDK v2](https://aws.github.io/aws-sdk-go-v2/))
-* Ready-to-use utilities for common tasks 🧰. See the [pkg](pkg) folder for more details.
-* Built-in [Docker](https://www.docker.com/) support 🐳
+* Ready-to-use utilities for common tasks 🧰. See the [pkg](./pkg) folder for more details.
+* Simple API for adding a [Fiber](https://github.com/gofiber) server 🚀 (Web, Rest or a custom one).
+* Built-in [Docker](https://www.docker.com/) support 🐳. Check the `./container` folder for more details.
 * Out-of-the-box [GitHub Actions](https://docs.github.com/en/actions) workflows for CI/CD 🚀
 * Built-in [PreCommit](https://pre-commit.com/) hooks for linting and formatting 🧹
-* Out-of-the-box support for output data in `yaml`, `json` or `tables`🤖
+* Server modes that are ready for either _dev_ or _prod_ environments 🚀
+* The latest [sLog](https://pkg.go.dev/golang.org/x/exp/slog) for logging 📝
 
-### Safely share the `AppAppent` to `subCommands` 🤝
-On each subcommand (at the parent level, which means, those that are in the top of your `pkg`), ensure you're implementing the `GetAppent` function:
-```go
-func GetAppent(cmd *cobra.Command) *App.Appent {
-	ctx := cmd.Context().Value(Apputils.GetCtxKey())
-	if ctx == nil {
-		log.Fatal("Unable to get the Appent context.")
-	}
-	Appent, ok := ctx.(*App.Appent)
-	if !ok {
-		log.Fatal("Unable to assert Appent.")
-	}
-	return Appent
-}
-```
 ### Adapters 🧩
-Adapters are known also as `Appents`. They can plug into the `AppAppent` and provide additional functionality. This template includes a subcommand called `aws-ecs` in the `cmd/example` package. It's a subcommand that use the `aws` adapter to read the `ECS` clusters in your account. It's a good example of how to use the `AppAppent` and the `aws` adapter. See [here](https://github.com/Excoriate/go-service-boilerplate/blob/4caff5eade39799fb3945e52d14f937251233e9a/cmd/example/aws.go#L68-L68)
-
+Adapters are known also as `interfaces/drivers`. They can plug into the `App` and provide additional functionality. This template comes with the following:
+* [AWS](https://github.com/aws/aws-sdk-go-v2) - AWS SDK v2 for Golang.
+* [Supabase](https://supabase.com/) - Simple client for Supabase.
+* [GitHub](https://github.com/google/go-github) - Simple client for GitHub. (Coming soon 🚧)
+* [OpenAI](https://openai.com/) - Simple client for OpenAI. (Coming soon 🚧)
 ---
 
 ## Tooling 🧑‍🔧
@@ -151,7 +104,6 @@ This template is equipped with an array of tools to maintain a high standard of 
 ---
 ## Roadmap 🗓️
 * [ ] Add a built-in `GitHub` adapter.
-* [ ] Add a App for quickly bootstrapping a new App
 * [ ] Add an [OpenAI](https://openai.com/) adapter for generating App documentation and/or other purposes.
 
 ## Contributing
